@@ -13,9 +13,15 @@ class ContaBancariaRepository:
 
     def consultar(self, numero_conta):
         print(f'vai consultar a conta {numero_conta}')
-        comando_sql = f'select numero_conta, saldo from conta where numero_conta = "{numero_conta}"'
+        comando_sql = f'select numero_conta, saldo from conta_bancaria where numero_conta = "{numero_conta}"'
+        print(f'vai executar o comando {comando_sql}')
         cursor = MySQLConexaoUtil.get_cursor()
         cursor.execute(comando_sql)
         row = cursor.fetchone()
         cursor.close()
+
+        if row is None:
+            raise ValueError("Error ao encontrar a conta")
+
+
         return ContaBancaria(row[0], row[1])

@@ -8,7 +8,7 @@ class ContaBancariaGui:
         print("[02] - conta poupanca")
         tipo_conta = int(input())
 
-        valor_inicial = float(input("Digite o Valor do deposito inicial"))
+        valor_inicial = float(input("Digite o Valor do deposito inicial "))
 
         conta_bancaria_service = ContaBancariaService()
 
@@ -21,10 +21,11 @@ class ContaBancariaGui:
     def consultar_saldo(self):
         conta_bancaria_service = ContaBancariaService()
 
-        numero_conta = input("Por favor, informe o número da sua conta")
+        numero_conta = input("Por favor, informe o número da sua conta! ")
 
         try:
-            conta = conta_bancaria_service.consultar_saldo(numero_conta)
+            saldo = conta_bancaria_service.consultar_saldo(numero_conta)
+            print(f'O saldo da sua conta é: {saldo}')
         except Exception:
             raise ValueError("A Conta não foi localizada. Por favor, tentar novamente")
 
