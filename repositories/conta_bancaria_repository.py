@@ -12,16 +12,20 @@ class ContaBancariaRepository:
         cursor.close()
 
     def consultar(self, numero_conta):
-        print(f'vai consultar a conta {numero_conta}')
         comando_sql = f'select numero_conta, saldo from conta_bancaria where numero_conta = "{numero_conta}"'
-        print(f'vai executar o comando {comando_sql}')
         cursor = MySQLConexaoUtil.get_cursor()
         cursor.execute(comando_sql)
         row = cursor.fetchone()
         cursor.close()
 
         if row is None:
-            raise ValueError("Error ao encontrar a conta")
-
+            raise ValueError(f'Conta {numero_conta} não foi encontrada ')
 
         return ContaBancaria(row[0], row[1])
+
+    def atualizar_saldo(self, conta_bancaria):
+        comando_sql = f'update conta_bancaria set saldo = "{conta_bancaria.get_saldo()}" where numero_conta = "{conta_bancaria.get_numero_conta()}"'
+        cursor = MySQLConexaoUtil.get_cursor()
+        cursor.execute(comando_sql)
+        MySQLConexaoUtil.commit()
+        cursor.close()

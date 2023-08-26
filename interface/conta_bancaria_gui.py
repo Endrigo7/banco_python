@@ -26,6 +26,30 @@ class ContaBancariaGui:
         try:
             saldo = conta_bancaria_service.consultar_saldo(numero_conta)
             print(f'O saldo da sua conta é: {saldo}')
-        except Exception:
-            print("A Conta não foi localizada. Por favor, tentar novamente")
+        except Exception as e:
+            print(e.args)
+
+    def creditar(self):
+        numero_conta = input("Por favor, informe o numero da conta ")
+        valor = float(input("Por favor, informe o valor a ser creditado "))
+
+        conta_bancaria_serivce = ContaBancariaService()
+
+        try:
+            conta_bancaria_serivce.creditar(numero_conta, valor)
+        except Exception as e:
+            print(f'Não foi possível realizar o crédito na conta {numero_conta}. Erro: {e.args}')
+
+    def debitar(self):
+        numero_conta = input("Por favor, informe o número da conta ")
+        valor = float(input("Por favor, informe informe o valor do debito "))
+
+        conta_bancaria_serivce = ContaBancariaService()
+
+        try:
+            conta_bancaria_serivce.debitar(numero_conta, valor)
+        except Exception as e:
+            print(f'Não foi possível realizar o debito na conta  {numero_conta}. Erro: {e.args}')
+
+
 
