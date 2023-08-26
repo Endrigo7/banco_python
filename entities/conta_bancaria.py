@@ -1,7 +1,8 @@
 class ContaBancaria:
 
-    def __init__(self, numero_conta: str, valor_inicial: float):
+    def __init__(self, numero_conta: str, senha: str, valor_inicial: float):
         self.__numero_conta = numero_conta
+        self.__senha = senha
         self.__saldo = valor_inicial
 
     def get_numero_conta(self):
@@ -9,6 +10,9 @@ class ContaBancaria:
 
     def get_saldo(self):
         return self.__saldo
+
+    def get_senha(self):
+        return self.__senha
 
     def creditar(self, valor: float):
         self.__saldo += valor

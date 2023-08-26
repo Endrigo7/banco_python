@@ -4,7 +4,7 @@ from entities import ContaBancaria
 class ContaBancariaRepository:
 
     def inserir(self, conta_bancaria):
-        comando_sql = f'insert into conta_bancaria (numero_conta, saldo) values ("{conta_bancaria.get_numero_conta()}", "{conta_bancaria.get_saldo()}")'
+        comando_sql = f'insert into conta_bancaria (numero_conta, senha, saldo) values ("{conta_bancaria.get_numero_conta()}", "{conta_bancaria.get_senha()}", "{conta_bancaria.get_saldo()}")'
 
         cursor = MySQLConexaoUtil.get_cursor()
         cursor.execute(comando_sql)
@@ -12,7 +12,7 @@ class ContaBancariaRepository:
         cursor.close()
 
     def consultar(self, numero_conta):
-        comando_sql = f'select numero_conta, saldo from conta_bancaria where numero_conta = "{numero_conta}"'
+        comando_sql = f'select numero_conta, senha, saldo from conta_bancaria where numero_conta = "{numero_conta}"'
         cursor = MySQLConexaoUtil.get_cursor()
         cursor.execute(comando_sql)
         row = cursor.fetchone()
@@ -21,7 +21,7 @@ class ContaBancariaRepository:
         if row is None:
             raise ValueError(f'Conta {numero_conta} não foi encontrada ')
 
-        return ContaBancaria(row[0], row[1])
+        return ContaBancaria(row[0], row[1], row[2])
 
     def atualizar_saldo(self, conta_bancaria):
         comando_sql = f'update conta_bancaria set saldo = "{conta_bancaria.get_saldo()}" where numero_conta = "{conta_bancaria.get_numero_conta()}"'
