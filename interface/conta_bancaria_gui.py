@@ -27,5 +27,5 @@ class ContaBancariaGui:
             saldo = conta_bancaria_service.consultar_saldo(numero_conta)
             print(f'O saldo da sua conta é: {saldo}')
         except Exception:
-            raise ValueError("A Conta não foi localizada. Por favor, tentar novamente")
+            print("A Conta não foi localizada. Por favor, tentar novamente")
 
